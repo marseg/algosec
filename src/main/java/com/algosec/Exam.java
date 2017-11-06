@@ -1,9 +1,6 @@
 package com.algosec;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author <a href="mailto:sergey.dolzhenok@gmail.com">Sergey Dolzhenok</a>
@@ -11,7 +8,10 @@ import java.util.Map;
 public class Exam {
     public static void main(String[] args) throws Exception {
 
-        List<Segment> segments = createListOfSegments(10000, 10000);
+        int size = requestUserForInt("segments.count");
+        int maxX = requestUserForInt("max.x.on.axe");
+
+        List<Segment> segments = createListOfSegments(size, maxX);
 
         firstWay(segments);
         secondWay(segments);
@@ -71,9 +71,9 @@ public class Exam {
             //iterationsCount++;
         }
 
-        System.out.println(minKey + " -> " + maxValue);
+        System.out.println("Point " + minKey + " -> " + maxValue + " counts");
 
-        System.out.println(System.currentTimeMillis() - startTime);
+        System.out.println((System.currentTimeMillis() - startTime) + " ms");
         //System.out.println("Compares: " + comparesCount);
         //System.out.println("Writes: " + writesCount);
         //System.out.println("Iterations: " + iterationsCount);
@@ -151,12 +151,29 @@ public class Exam {
             //iterationsCount++;
         }
 
-        System.out.println(minKey + " -> " + maxValue);
+        System.out.println("Point " + minKey + " -> " + maxValue + " counts");
 
-        System.out.println(System.currentTimeMillis() - startTime);
+        System.out.println((System.currentTimeMillis() - startTime) + " ms");
         //System.out.println("Compares: " + comparesCount);
         //System.out.println("Writes: " + writesCount);
         //System.out.println("Iterations: " + iterationsCount);
+    }
+
+    public static int requestUserForInt(String param) {
+        System.out.println("Enter '" + param + "':");
+
+        int number = 0;
+        Scanner in = new Scanner(System.in);
+        while (number == 0) {
+            String input = in.next();
+            try {
+                number = Integer.valueOf(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Please, use positive numbers.");
+            }
+        }
+
+        return number;
     }
 
     private static List<Segment> createListOfSegments(int size, int max) {
