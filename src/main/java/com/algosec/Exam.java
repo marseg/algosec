@@ -29,10 +29,6 @@ public class Exam {
         int maxValue = 0;
         int minKey = 0;
 
-        //long comparesCount = 0;
-        //long writesCount = 0;
-        //long iterationsCount = 0;
-
         //Iterate all segments
         for (Segment segment : segments) {
             // Increment a counter for each point in the segment
@@ -40,18 +36,12 @@ public class Exam {
                 int value = 0;
                 if (!pointsCount.containsKey(x)) {
                     pointsCount.put(x, 0);
-                    //writesCount++;
                 } else {
                     value = pointsCount.get(x);
                 }
-                //comparesCount++;
 
                 pointsCount.put(x, value + 1);
-                //writesCount++;
-
-                //iterationsCount++;
             }
-            //iterationsCount++;
         }
 
         // Choose the most "popular"
@@ -59,24 +49,14 @@ public class Exam {
             if (entry.getValue() > maxValue) {
                 maxValue = entry.getValue();
                 minKey = entry.getKey();
-
-                //comparesCount++;
-                //writesCount += 2;
             } else if (entry.getValue() == maxValue && entry.getKey() < minKey) {
                 minKey = entry.getKey();
-
-                //comparesCount += 2;
-                //writesCount++;
             }
-            //iterationsCount++;
         }
 
         System.out.println("Point " + minKey + " -> " + maxValue + " counts");
 
         System.out.println((System.currentTimeMillis() - startTime) + " ms");
-        //System.out.println("Compares: " + comparesCount);
-        //System.out.println("Writes: " + writesCount);
-        //System.out.println("Iterations: " + iterationsCount);
     }
 
     /**
@@ -91,47 +71,29 @@ public class Exam {
         int maxValue = 0;
         int minKey = 0;
 
-        //long comparesCount = 0;
-        //long writesCount = 0;
-        //long iterationsCount = 0;
-
         //Find the min and max points
         int minX = segments.get(0).getStartX();
         int maxX = segments.get(0).getEndX();
         for (Segment segment : segments) {
             if (segment.getStartX() < minX) {
                 minX = segment.getStartX();
-
-                //writesCount++;
             }
-            //comparesCount++;
 
             if (segment.getEndX() > maxX) {
                 maxX = segment.getEndX();
-
-                //writesCount++;
             }
-            //comparesCount++;
-
-            // iterationsCount++;
         }
 
         //Iterate all points
         for (int x = minX; x <= maxX; x++) {
             pointsCount.put(x, 0);
-            //writesCount++;
 
             // Count segments with this point
             for (Segment segment : segments) {
                 if (x >= segment.getStartX() && x <= segment.getEndX()) {
                     pointsCount.put(x, pointsCount.get(x) + 1);
-
-                    //writesCount++;
                 }
-                //comparesCount += 2;
-                //iterationsCount++;
             }
-            //iterationsCount++;
         }
 
         // Choose the most "popular"
@@ -139,24 +101,14 @@ public class Exam {
             if (entry.getValue() > maxValue) {
                 maxValue = entry.getValue();
                 minKey = entry.getKey();
-
-                //comparesCount++;
-                //writesCount += 2;
             } else if (entry.getValue() == maxValue && entry.getKey() < minKey) {
                 minKey = entry.getKey();
-
-                //comparesCount += 2;
-                //writesCount++;
             }
-            //iterationsCount++;
         }
 
         System.out.println("Point " + minKey + " -> " + maxValue + " counts");
 
         System.out.println((System.currentTimeMillis() - startTime) + " ms");
-        //System.out.println("Compares: " + comparesCount);
-        //System.out.println("Writes: " + writesCount);
-        //System.out.println("Iterations: " + iterationsCount);
     }
 
     public static int requestUserForInt(String param) {
